@@ -1,5 +1,4 @@
 import random
-import math
 
 class Board:
   def __init__(self, dimension = 8, positions = []) -> None:
@@ -97,44 +96,3 @@ class Board:
         aux_board.fill_board()
         aux_board.set_number_of_attacks()
         self.board_states[j][i] = aux_board.number_of_attacks
-
-def main():
-  repetitions = 10000
-  amount = 0
-  dimension = 8
-  game = Board(dimension)
-  
-  for x in range(repetitions):
-    count = 0
-    while True:
-      count += 1
-      game.generate_positions()
-      
-      minimum = 28
-      
-      while True:
-        for i in range(dimension):
-          for j in range(dimension):
-            if minimum > game.board_states[j][i]:
-              minimum = game.board_states[j][i]
-              position = (j,i)
-
-        if minimum == game.number_of_attacks:
-          break
-        else:
-          positions = game.get_positions().copy()
-          positions[position[1]] = position[0]
-          game.set_positions(positions)
-      
-      if game.number_of_attacks == 0:
-        #print(f"Houve resultados após {count} iterações\n")
-        #print(f"Posições: {game.get_positions()}\n")
-        #print(f"Tabuleiro:")
-        #game.print_board()
-        break
-
-    amount += count
-      
-  print(f"Média de iterações é {math.ceil(amount/repetitions)}")
-
-main()
