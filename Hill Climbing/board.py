@@ -39,6 +39,9 @@ class Board:
       row = self.__positions[column]
       self.board[row][column] = 1
   
+  #Função responsável por obter o número de rainhas que se atacam. 
+  #Analisa por coluna em ordem crescente as peças que se atacam com a peça da presente na coluna.
+  #A contagem é feita analisando a linha e as diagonais da peça.
   def set_number_of_attacks(self):
     number_of_attacks = 0
     
@@ -87,6 +90,7 @@ class Board:
     
     return number_of_attacks
 
+  #Essa função é a responsável por gerar o tabuleiro de estados, onde possui os valores que serão utilizados pela função objetivo.
   def __generate_state(self):
     for i in range(self.dimension):
       for j in range(self.dimension):

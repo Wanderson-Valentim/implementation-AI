@@ -31,6 +31,7 @@ def get_proportions(boards):
   
   return boards
 
+#Seleciona os pais de acordo com uma taxa gerada aleatoriamente e o valor da proporção de cada elemento.
 def select_parents(population):
   generate_rate = (math.floor(random.random() * 10) / 10) * 100
   size_population = len(population)
@@ -98,13 +99,9 @@ def genetic_algorithm(max_it, size_population, mutation_rate):
     population = get_proportions(population)
     
     if population[0].number_of_no_attacks == 28:
-      #print(f'Iteração {geration + 1}, Posições: {population[0].get_positions()}, Fitness: {population[0].number_of_no_attacks}, Proporção: {population[0].proportion}')
-      #population[0].print_board()
       geration += 1
       break
     
-    #print(f'Iteração {geration + 1}, Posições: {population[0].get_positions()}, Fitness: {population[0].number_of_no_attacks}, Proporção: {population[0].proportion}')
-
     geration += 1
   
   return [geration, population[0]]
@@ -118,9 +115,3 @@ def run_the_algorithm(num_of_iterations, max_it, size_population, mutation_rate)
     print(f'Iteração {solution[0]}, Posições: {solution[1].get_positions()}, Fitness: {solution[1].number_of_no_attacks}, Proporção: {solution[1].proportion}')
   
   return number_of_ideal_solutions
-
-print(f'Foram encontrados {run_the_algorithm(10, 100, 100, 0.2)} resultados com população 100')
-print()
-print(f'Foram encontrados {run_the_algorithm(10, 100, 150, 0.2)} resultados com população 150')
-print()
-print(f'Foram encontrados {run_the_algorithm(10, 100, 200, 0.2)} resultados com população 200')

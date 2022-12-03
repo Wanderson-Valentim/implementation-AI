@@ -1,24 +1,23 @@
 import math
 from board import Board
 
-def main():
-  no_results = 0
-  repetitions = 10
+def hill_climbing(repetitions):
   amount = 0
   dimension = 8
   game = Board(dimension)
   
-  for x in range(repetitions):
+  for rep in range(repetitions):
     count = 0
     while True:
       count += 1
       game.generate_positions()
       
-      minimum = 28
+      minimum = math.inf
       
       while True:
         for i in range(dimension):
           for j in range(dimension):
+            #Função objetivo que pega o menor valor dentre a quantidades de pares de rainhas que se atacam
             if minimum > game.board_states[j][i]:
               minimum = game.board_states[j][i]
               position = (j,i)
@@ -31,22 +30,15 @@ def main():
           game.set_positions(positions)
       
       if game.number_of_attacks == 0:
-        #print(f"Houve resultados na {count}ª iteração\n")
-        #print(f"Posições: {game.get_positions()}\n")
-        #print(f"Tabuleiro:")
-        #game.print_board()
+        print(f"-------- {rep+1}ª GERAÇÃO --------")
+        print(f"Houve resultados na {count}ª iteração")
+        print(f"Posições: {game.get_positions()}")
+        print(f"Tabuleiro:")
+        game.print_board()
+        print()
         break
-      else: 
-        #print(f"Núero de ataques: {game.number_of_attacks}\n")
-        #print(f"Posições: {game.get_positions()}\n")
-        #print(f"Tabuleiro:")
-        #game.print_board()
-        no_results += 1
         
     amount += count
       
-  print(f"Média de iterações: {math.ceil(amount/repetitions)}")
-  print(f"Número de iterações sem resultados: {no_results}")
-
-main()
-
+  print("-------- RESULTADO FINAL --------")
+  print(f"Média com {repetitions} iterações: {math.ceil(amount/repetitions)}")
